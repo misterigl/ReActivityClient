@@ -39,6 +39,10 @@ export default class SettingsScreen extends React.Component {
     this.props.navigator.push('signup');
   }
 
+  goToEditProfile = () => {
+    this.props.navigator.push('editprofile');
+  }
+
   logout = () => {
     AsyncStorage.multiRemove(['JWTtoken','userId', 'username']).then(() => {
       console.log('token deleted');
@@ -70,6 +74,8 @@ export default class SettingsScreen extends React.Component {
           color="#841584"
         />
         <Text onPress={this.goToSignup}>Signup</Text>
+        <Text onPress={this.goToEditProfile}>Edit Profile</Text>
+
       </ScrollView>
     );
   }
