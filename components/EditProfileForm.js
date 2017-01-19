@@ -28,15 +28,16 @@ export default class EditProfileForm extends React.Component {
       selectedInterests: [],
       submitWarning: '',
       defaults: {
-        firstName : 'test',
-        lastName : 'test',
+        firstName : '',
+        lastName : '',
         password: '',
         bioText : ''
-      }
-
+      },
+      loaded: false,
     }
   }
   componentWillMount() {
+    //get userInfo from server
     let userProfileInformation = store.getState().userProfileInformation;
     api.getUserByUsername(userProfileInformation.username,
       (userInfo) => {
@@ -54,8 +55,11 @@ export default class EditProfileForm extends React.Component {
             bioText : userInfo.bioText,
           },
           selectedInterests: userInterests,
+          loaded: true,
         });
-      })
+      }
+    );
+    // get available Interests from store to choose from
     let interestsFromStore = store.getState().sportsToIds;
     let availableInterests = [];
     for (let i = 0; i < interestsFromStore.length; i++) {
@@ -75,35 +79,15 @@ export default class EditProfileForm extends React.Component {
 
   render() {
     let {height, width} = Dimensions.get('window');
-
+    let loaded = this.state.loaded;
+    if (!loaded) {
+      return null;
+    }
     return (
       <View style={{flex: 1,
           flexDirection: 'row',
           alignItems: 'stretch',
           justifyContent: 'center'}}>
-  <Modal
-    animationType={"slide"}
-    transparent={false}
-    visible={this.state.modalVisible}
-    onRequestClose={() => {this.setState({modalVisible: false})}}
-    >
-    <View style={{flex: 1,
-        flexDirection: 'row',
-        alignItems: 'stretch',
-        justifyContent: 'center'}}>
-    <View style={{marginTop: 25, width: width}}>
-      <GooglePlacesWidget queryType='(cities)' state = {this}/>
-    </View>
-  </View>
-      <Button
-        onPress={() => {
-          this.setState({modalVisible: false});
-        }}
-        title="Go Back"
-        color="blue"
-      />
-
-  </Modal>
   <Modal
     animationType={"slide"}
     transparent={false}
