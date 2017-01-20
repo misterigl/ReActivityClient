@@ -93,7 +93,7 @@ export default class OtherUserProfileScreen extends React.Component {
     var that = this;
 
     if (this.state.loaded === false) {
-          return (<Image source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif'}} style={{flex: 1,width: 300, height: 300, alignItems: 'center', justifyContent: 'center'}}></Image>);
+          return (<Text></Text>);
 
 
 
