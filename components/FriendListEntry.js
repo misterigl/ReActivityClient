@@ -49,7 +49,7 @@ export default class FriendListEntry extends React.Component {
             colors={['transparent', 'rgba(0,0,0,1)']}
             style={styles.creatorNameGradient}
           >
-            <Text style={styles.creatorName}>{this.props.friend.firstName} {this.props.friend.lastName}</Text>
+            <Text numberOfLines={1} style={styles.creatorName}>{this.props.friend.firstName}</Text>
           </Components.LinearGradient>
         </Image>
     </TouchableOpacity>
@@ -84,10 +84,11 @@ const styles = StyleSheet.create({
   },
   creatorName: {
     textAlign: 'center',
-    fontSize: 14,
+    fontSize: width/25,
     fontWeight: '300',
     color: 'azure',
     backgroundColor: 'transparent',
-    fontFamily: 'rubik'
+    fontFamily: 'rubik',
+
   },
 });
